@@ -86,7 +86,7 @@ function loadImagesBasedOnSeason(apiData) {
     let flowerName;
     do {
       randomIndex = Math.floor(Math.random() * seasonFlowers.length);
-      flowerName = seasonFlowers[randomIndex].plantName;
+      flowerName = seasonFlowers[randomIndex].plantName.toLowerCase();;
     } while (selectedFlowerNames.includes(flowerName)); // Keep generating random index until a unique flower name is found
 
     selectedFlowerNames.push(flowerName); // Add the selected flower name to the list
