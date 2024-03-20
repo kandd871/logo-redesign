@@ -11,6 +11,7 @@ const options = {
 
 let testImage;
 let flowerImages = [];
+let imagePaths = [];
 let a = 0;
 let iterations = 0;
 let flowers = []; // Array to store flower instances
@@ -19,6 +20,11 @@ let c = 2;
 let colorPicker;
 var add = document.getElementById('add');
 let seasonText = document.getElementById('text')
+let one = document.getElementById('one');
+let two = document.getElementById('two');
+let three = document.getElementById('three');
+flowerImages = [];
+let selectedFlowerNames = [];
 
 async function preload() {
   testImage = loadImage('logo.png');
@@ -75,9 +81,6 @@ function loadImagesBasedOnSeason(apiData) {
     return;
   }
 
-  flowerImages = [];
-  let selectedFlowerNames = [];
-
   for (let i = 0; i < 3; i++) {
     let randomIndex;
     let flowerName;
@@ -88,11 +91,16 @@ function loadImagesBasedOnSeason(apiData) {
 
     selectedFlowerNames.push(flowerName); // Add the selected flower name to the list
     const imagePath = `imgs/${season}/${flowerName}.png`;
+    imagePaths.push(imagePath);
     const flowerImage = loadImage(imagePath);
     flowerImages.push(flowerImage);
     console.log(flowerName);
-    console.log(imagePath);
+    console.log(imagePaths);
   }
+  embedImage1();
+  embedImage2();
+  embedImage3();
+  console.log(selectedFlowerNames);
 }
 
 function setup() {
@@ -102,6 +110,21 @@ function setup() {
   colorPicker = select('#color');
 }
 
+function embedImage1() {
+  let imagesHTML1 = '';
+  imagesHTML1 += `<img src="${imagePaths[0]}"/>`;
+  one.innerHTML = imagesHTML1;
+}
+function embedImage2() {
+  let imagesHTML2 = '';
+  imagesHTML2 += `<img src="${imagePaths[1]}"/>`;
+  two.innerHTML = imagesHTML2;
+}
+function embedImage3() {
+  let imagesHTML3 = '';
+  imagesHTML3 += `<img src="${imagePaths[2]}"/>`;
+  three.innerHTML = imagesHTML3;
+}
 add.addEventListener('click', function increaseC(){
   c += 10;
 });

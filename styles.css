@@ -1,3 +1,6 @@
+*{
+  cursor: url("cursor.png"), auto;
+}
 body{
     margin: 0 auto;
     width: 100vw;
@@ -109,4 +112,26 @@ h2{
     border-style: dotted;
     border-radius:  100%;
     padding: 16px;
+}
+
+#images{
+  padding: 16px;
+  position: fixed;
+  font-size: 24px;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  color: black;
+  width: 99%;
+  display: flex;
+  bottom: 50px;
+  margin-right: 30px;
+  justify-content: right; /* Horizontally center the content */
+  font-family: "filmotype-yale", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#images img{
+  height:26px;
+  margin: 9px;
 }
