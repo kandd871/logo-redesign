@@ -16,6 +16,8 @@ let iterations = 0;
 let flowers = []; // Array to store flower instances
 let b = 0;
 let c = 2;
+let colorPicker;
+var add = document.getElementById('add');
 
 async function preload() {
   testImage = loadImage('logo.png');
@@ -91,10 +93,16 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   testImage.loadPixels();
   frameRate(20);
+  colorPicker = select('#color');
 }
 
+add.addEventListener('click', function increaseC(){
+  c += 10;
+});
+
 function draw() {
-  background(255);
+  let selectedColor = colorPicker.value();
+  background(selectedColor);
   image(testImage, 0, 0, 1440, 747);
   a++;
   const start = performance.now();

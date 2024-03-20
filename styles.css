@@ -5,5 +5,48 @@ body{
     display: flex;
     justify-content: center;
     text-align: center;
+    overflow: hidden;
     /* margin-top: 15vh; */
+}
+
+.buttons{
+display: flex;
+width: 100vw;
+position: absolute;
+justify-content: space-between;
+}
+
+#color{
+    background-color: #4C6851;
+    border: 1px solid black;
+    opacity: 50%;
+    display: flex;
+    width: 97.5vw;
+    height: 3vh;
+    cursor: pointer;
+    justify-content: space-between;
+  }
+
+  .add{
+    display: flex;
+    color:black;
+    height:3vh; 
+  }
+
+  #add{
+    background-color: transparent;
+    box-shadow: none;
+    width: 2.25vw;
+    cursor: pointer;
+    font-size: 2vh;
+    border: 1px solid black;
+  }
+input[type="color"] {
+    border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
 }
