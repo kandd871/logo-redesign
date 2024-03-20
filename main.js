@@ -122,7 +122,7 @@ function draw() {
 }
 
 function increaseC(){
-  c += 20;
+  c += 10;
 }
 function mouseClicked() {
   increaseC(); // Increase 'c' value when mouse is clicked
