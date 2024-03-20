@@ -18,6 +18,7 @@ let b = 0;
 let c = 2;
 let colorPicker;
 var add = document.getElementById('add');
+let seasonText = document.getElementById('season')
 
 async function preload() {
   testImage = loadImage('logo.png');
@@ -59,6 +60,7 @@ function loadImagesBasedOnSeason(apiData) {
   }
 
   console.log(`Season: ${season}`);
+  seasonText.textContent = `${season} Edition`;
 
   const seasonFlowers = apiData.filter(
     (flower) => flower.bloomingTimes && flower.bloomingTimes.toLowerCase().includes(season)
