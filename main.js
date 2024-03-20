@@ -95,11 +95,11 @@ function setup() {
 
 function draw() {
   background(255);
-  image(testImage, 0, 0, 1440, 403);
+  image(testImage, 0, 0, 1440, 747);
   a++;
   const start = performance.now();
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < c; i++) {
       const x = floor(random(testImage.width));
       const y = floor(random(testImage.height));
   
