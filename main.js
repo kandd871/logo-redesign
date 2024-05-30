@@ -132,7 +132,15 @@ add.addEventListener('click', function increaseC(){
 function draw() {
   let selectedColor = colorPicker.value();
   background(selectedColor);
-  image(testImage, 0, 0, 1440, 747);
+  // image(testImage, 0, 0, 1440, 747);
+
+// Calculate the top-left position to center the testImage
+  let imgX = (width - testImage.width) / 2;
+  let imgY = (height - testImage.height) / 2;
+
+  // Draw the centered image
+  image(testImage, imgX, imgY);
+
   a++;
   const start = performance.now();
 
