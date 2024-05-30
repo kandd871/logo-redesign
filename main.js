@@ -3,20 +3,31 @@
 const options = {
   method: 'GET',
   headers: {
-    'content-type': 'application/x-www-form-urlencoded',
+    // 'content-type': 'application/x-www-form-urlencoded',
     'X-RapidAPI-Key': 'acb67667d6msh2487a39292a375bp1ee17ajsne899f2bd0cab',
     'X-RapidAPI-Host': 'garden-api.p.rapidapi.com',
   },
 };
 
+const options2 = {
+	method: 'GET',
+  url: 'https://open-weather13.p.rapidapi.com/city/landon/EN',
+  headers: {
+    'X-RapidAPI-Key': 'acb67667d6msh2487a39292a375bp1ee17ajsne899f2bd0cab',
+    'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com'
+}
+};
+
 let testImage;
 let flowerImages = [];
 let imagePaths = [];
-let a = 0;
+// let a = 0;
 let iterations = 0;
 let flowers = []; // Array to store flower instances
 let b = 0;
 let c = 2;
+let wind = 1;
+let humidity = 10;
 let colorPicker;
 var add = document.getElementById('add');
 let seasonText = document.getElementById('text')
@@ -28,9 +39,13 @@ let selectedFlowerNames = [];
 
 async function preload() {
   testImage = loadImage('logo.png');
-  const apiData = await fetchData();
+  
+  const [apiData, weatherData] = await Promise.all([fetchData(), fetchWeatherData()]);
+  
   console.log(apiData);
-  loadImagesBasedOnSeason(apiData);
+  console.log(weatherData);
+  
+  loadImagesBasedOnSeason(apiData, weatherData);
 }
 
 async function fetchData() {
@@ -45,7 +60,28 @@ async function fetchData() {
   }
 }
 
-function loadImagesBasedOnSeason(apiData) {
+async function fetchWeatherData() {
+  const url = 'https://open-weather13.p.rapidapi.com/city/paris/EN';
+  try {
+    const response = await fetch(url, options2);
+    const result = await response.text();
+    return JSON.parse(result);
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+}
+
+
+
+function loadImagesBasedOnSeason(apiData, weatherData) {
+
+  humidity = weatherData.main.humidity; // Update global humidity variable
+  wind = weatherData.wind.speed; // Update global wind variable
+  console.log(`humidity: ${humidity}, wind: ${wind}`);
+
+  c = humidity/50;
+
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
 
@@ -125,9 +161,9 @@ function embedImage3() {
   imagesHTML3 += `<img src="${imagePaths[2]}"/>`;
   three.innerHTML = imagesHTML3;
 }
-add.addEventListener('click', function increaseC(){
-  c += 10;
-});
+// add.addEventListener('click', function increaseC(){
+//   c += 10;
+// });
 
 function draw() {
   let selectedColor = colorPicker.value();
@@ -141,8 +177,9 @@ function draw() {
   // Draw the centered image
   image(testImage, imgX, imgY);
 
-  a++;
+  // a++;
   const start = performance.now();
+  
 
   for (let i = 0; i < c; i++) {
       const x = floor(random(testImage.width));
@@ -158,20 +195,20 @@ function draw() {
   console.log(`took ${floor(end - start)} ms`);
 
   updateAndDrawFlowers(); // Update and draw flower instances
-
-  // iterations++; // Increment the iterations counter
-  // if (iterations >= 35) {
-  //   noLoop(); // Stop drawing after the maximum number of iterations
-  //   return;
-  // }
+  iterations++;
+  console.log(iterations);
+  if (iterations >= (humidity * 15)) {
+    noLoop(); // Stop drawing after the maximum number of iterations
+    return;
+  }
 }
 
-function increaseC(){
-  c += 10;
-}
-function mouseClicked() {
-  increaseC(); // Increase 'c' value when mouse is clicked
-}
+// function increaseC(){
+//   c += 10;
+// }
+// function mouseClicked() {
+//   increaseC(); // Increase 'c' value when mouse is clicked
+// }
 
 function createFlowerInstance(x, y) {
   const minSize = 10; // Minimum size of the flowers
@@ -179,7 +216,7 @@ function createFlowerInstance(x, y) {
   const size = random(minSize, maxSize); // Random size within the range
   const randomFlowerImage = random(flowerImages);
   if (randomFlowerImage) {
-    flowers.push(new FlowerInstance(x - size / 2, y - size / 2, size, randomFlowerImage));
+    flowers.push(new FlowerInstance(x, y*1.05, size, randomFlowerImage));
   }
 }
 
@@ -202,9 +239,9 @@ class FlowerInstance {
     this.scale = 0; // Initial scale
     this.growing = true; // Flag to control growth
     this.growthRate = random(.05, .2); // Growth rate
-    this.velocityX = random(-.05, .05); // Random velocity in X direction
-    this.velocityY = random(-.05, .05); // Random velocity in Y direction
-    this.rotationAngle = random(-15, 15);
+    this.velocityX = wind * random(-.01, .01); // Random velocity in X direction
+    this.velocityY = wind * random(-.01, .01); // Random velocity in Y direction
+    this.rotationAngle = random(-25, 25);
   }
 
   update() {
