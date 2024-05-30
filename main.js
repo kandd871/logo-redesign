@@ -4,7 +4,7 @@ const options = {
   method: 'GET',
   headers: {
     'content-type': 'application/x-www-form-urlencoded',
-    'X-RapidAPI-Key': 'd381b4adc2msh80dd4cb3e5d715fp17cf18jsnf726a513495e',
+    'X-RapidAPI-Key': 'acb67667d6msh2487a39292a375bp1ee17ajsne899f2bd0cab',
     'X-RapidAPI-Host': 'garden-api.p.rapidapi.com',
   },
 };
