@@ -8,6 +8,7 @@ body{
     display: flex;
     justify-content: center;
     text-align: center;
+    /* background-color: #4C6851; */
     overflow: hidden;
     /* margin-top: 15vh; */
 }

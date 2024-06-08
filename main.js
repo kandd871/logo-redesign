@@ -168,38 +168,31 @@ function embedImage3() {
 function draw() {
   let selectedColor = colorPicker.value();
   background(selectedColor);
-  // image(testImage, 0, 0, 1440, 747);
-
-// Calculate the top-left position to center the testImage
   let imgX = (width - testImage.width) / 2;
   let imgY = (height - testImage.height) / 2;
-
-  // Draw the centered image
   image(testImage, imgX, imgY);
 
-  // a++;
-  const start = performance.now();
-  
+  if (iterations <= humidity * 15) {
 
-  for (let i = 0; i < c; i++) {
+    const start = performance.now();
+
+    for (let i = 0; i < c; i++) {
       const x = floor(random(testImage.width));
       const y = floor(random(testImage.height));
-  
+
       const pixelAlpha = getQuick(testImage, x, y)[3];
       if (random(100) < pixelAlpha) {
-        createFlowerInstance(x, y);
+        createFlowerInstance(x + imgX, y + imgY);
+      }
     }
-    
-  }
-  const end = performance.now();
-  console.log(`took ${floor(end - start)} ms`);
+    const end = performance.now();
+    console.log(`took ${floor(end - start)} ms`);
 
-  updateAndDrawFlowers(); // Update and draw flower instances
-  iterations++;
-  console.log(iterations);
-  if (iterations >= (humidity * 15)) {
-    noLoop(); // Stop drawing after the maximum number of iterations
-    return;
+    updateAndDrawFlowers(); // Update and draw flower instances
+    iterations++;
+    console.log(iterations);
+  } else {
+    updateAndDrawFlowers(); 
   }
 }
 
@@ -216,17 +209,18 @@ function createFlowerInstance(x, y) {
   const size = random(minSize, maxSize); // Random size within the range
   const randomFlowerImage = random(flowerImages);
   if (randomFlowerImage) {
-    flowers.push(new FlowerInstance(x, y*1.05, size, randomFlowerImage));
+    flowers.push(new FlowerInstance(x, y-5, size, randomFlowerImage));
   }
 }
 
 function updateAndDrawFlowers() {
   for (let i = flowers.length - 1; i >= 0; i--) {
+    if (iterations <= humidity * 15) {
     flowers[i].update(); // Update each flower instance
-    flowers[i].display(); // Display each flower instance
-    // if (flowers[i].finished()) {
-    //   flowers.splice(i, 1); // Remove finished flower instances
-    // }
+    flowers[i].display();
+    } else{
+    flowers[i].display(); 
+    }
   }
 }
 
