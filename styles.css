@@ -16,7 +16,6 @@ body{
 display: flex;
 width: 100vw;
 position: absolute;
-justify-content: space-between;
 }
 
 #color, #color2{
@@ -25,7 +24,7 @@ justify-content: space-between;
     border-style: dotted;
     opacity: 50%;
     display: flex;
-    width: 98vw;
+    width: 100vw;
     height: 3vh;
     cursor: pointer;
   }
@@ -34,26 +33,6 @@ justify-content: space-between;
     background-color: gray;
   }
 
-  .add{
-    display: flex;
-    height:3vh; 
-  }
-
-  #add{
-    background-color: transparent;
-    box-shadow: none;
-    width: 2.25vw;
-    cursor: pointer;
-    font-size: 2vh;
-    border: 1px solid black;
-    border-style: dotted;
-    color:black;
-  }
-
-  #add:hover{
-    background-color: black;
-    color:gray;
-  }
 input[type="color"] {
     border: none;
 }

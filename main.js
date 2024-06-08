@@ -20,7 +20,7 @@ const options2 = {
 
 let testImage;
 let flowerImages = [];
-let imagePaths = [];
+let imagePaths = ['imgs/summer/sunflower.png', 'imgs/summer/butterfly weed.png', 'imgs/summer/spider flower.png'];
 // let a = 0;
 let iterations = 0;
 let flowers = []; // Array to store flower instances
@@ -126,10 +126,14 @@ function loadImagesBasedOnSeason(apiData, weatherData) {
     } while (selectedFlowerNames.includes(flowerName)); // Keep generating random index until a unique flower name is found
 
     selectedFlowerNames.push(flowerName); // Add the selected flower name to the list
-    const imagePath = `imgs/${season}/${flowerName}.png`;
-    imagePaths.push(imagePath);
-    const flowerImage = loadImage(imagePath);
-    flowerImages.push(flowerImage);
+    // const imagePath = `imgs/${season}/${flowerName}.png`;
+    // imagePaths.push(imagePath);
+    imagePaths.forEach(imagePath => {
+      const flowerImage = loadImage(imagePath);
+      flowerImages.push(flowerImage);
+  });
+    // const flowerImage = loadImage(imagePath);
+    // flowerImages.push(flowerImage);
     console.log(flowerName);
     console.log(imagePaths);
   }
