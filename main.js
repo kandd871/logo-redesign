@@ -79,7 +79,7 @@ function loadImagesBasedOnSeason(apiData, weatherData) {
   wind = weatherData.wind.speed; // Update global wind variable
   console.log(`humidity: ${humidity}, wind: ${wind}`);
 
-  c = humidity/50;
+  c = humidity/45;
 
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
