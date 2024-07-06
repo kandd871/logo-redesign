@@ -1,5 +1,4 @@
 *{
-  cursor: url("cursor.png"), auto;
 }
 body{
     margin: 0 auto;
@@ -10,6 +9,7 @@ body{
     text-align: center;
     /* background-color: #4C6851; */
     overflow: hidden;
+    cursor: url("cursor.png"), auto;
     /* margin-top: 15vh; */
 }
 .buttons{
@@ -69,6 +69,10 @@ h2{
     text-transform: uppercase;
     position: relative;
     top: -182.5px;
+}
+
+.wait {
+  cursor: wait!important;
 }
 
 #season {

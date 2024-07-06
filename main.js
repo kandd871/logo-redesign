@@ -36,6 +36,16 @@ let three = document.getElementById('three');
 flowerImages = [];
 let selectedFlowerNames = [];
 
+// Add this function to toggle wait cursor
+function toggleWaitCursor(waiting) {
+  if (waiting) {
+    document.body.classList.add('wait'); // Add 'wait' class to show wait cursor
+  } else {
+    document.body.classList.remove('wait'); // Remove 'wait' class to reset cursor
+  }
+}
+
+
 async function preload() {
   testImage = loadImage('logo.png');
   
@@ -139,7 +149,7 @@ function loadImagesBasedOnSeason(apiData, weatherData) {
 }
 
 function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
+  createCanvas(window.innerWidth, window.innerHeight+1);
   testImage.loadPixels();
   frameRate(20);
   colorPicker = select('#color');
@@ -172,6 +182,7 @@ function draw() {
   image(testImage, imgX, imgY);
 
   if (iterations <= humidity * 15) {
+    toggleWaitCursor(true);
 
     const start = performance.now();
 
@@ -191,7 +202,8 @@ function draw() {
     iterations++;
     console.log(iterations);
   } else {
-    updateAndDrawFlowers(); 
+    updateAndDrawFlowers();
+    toggleWaitCursor(false); 
   }
 }
 
